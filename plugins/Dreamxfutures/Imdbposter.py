@@ -88,7 +88,7 @@ def _list_to_str_tmdb(data_list, limit=10, key=None):
 
 def _extract_title_and_year(query: str):
     """Extract title and optional year from a search query string."""
-    match = re.search(r'^(.*?)(?:\s+(\d{4}))?$', query.strip())
+    match = re.search(r'^(.*?)(?:\\s+(\\d{4}))?$', query.strip())
     if match:
         title, year_str = match.groups()
         year = int(year_str) if year_str and year_str.isdigit() else None
@@ -292,12 +292,12 @@ async def get_movie_details(query, bulk=False, id=False, file=None):
         title = query
         year_val = None
         
-        year_list = re.findall(r'[1-2]\d{3}$', query, re.IGNORECASE)
+        year_list = re.findall(r'[1-2]\\d{3}$', query, re.IGNORECASE)
         if year_list:
             year_val = year_list[0]
             title = (query.replace(year_val, "")).strip()
         elif file is not None:
-            year_list = re.findall(r'[1-2]\d{3}', file, re.IGNORECASE)
+            year_list = re.findall(r'[1-2]\\d{3}', file, re.IGNORECASE)
             if year_list:
                 year_val = year_list[0]
         
@@ -381,19 +381,18 @@ async def get_movie_details(query, bulk=False, id=False, file=None):
         'rating': str(movie.rating),
         "url": movie.url or f"https://www.imdb.com/title/{imdb_id}"
     }
-
-"""
+    
 async def old_get_movie_details(query, id=False, file=None):
     try:
         if not id:
             query = query.strip().lower()
             title = query
-            year = re.findall(r'[1-2]\d{3}$', query, re.IGNORECASE)
+            year = re.findall(r'[1-2]\\d{3}$', query, re.IGNORECASE)
             if year:
                 year = list_to_str(year[:1])
                 title = query.replace(year, "").strip()
             elif file is not None:
-                year = re.findall(r'[1-2]\d{3}', file, re.IGNORECASE)
+                year = re.findall(r'[1-2]\\d{3}', file, re.IGNORECASE)
                 if year:
                     year = list_to_str(year[:1])
             else:
@@ -469,7 +468,7 @@ async def old_get_movie_details(query, id=False, file=None):
     except Exception as e:
         logger.exception(f"An error occurred in get_movie_details: {e}")
         return None
-"""
+
 
 async def get_movie_detailsx(query, id=False, file=None):
     """
@@ -532,4 +531,3 @@ async def get_movie_detailsx(query, id=False, file=None):
     details['backdrop_url'] = backdrop_url.replace("/original/", "/w1280/") if backdrop_url else None
 
     return details
-
