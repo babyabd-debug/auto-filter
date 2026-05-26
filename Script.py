@@ -229,7 +229,7 @@ Nᴀᴍᴇ : {}
 
 Mᴇꜱꜱᴀɢᴇ : <b>{}</b>"""
     
-    CAPTION = """<b><a href="https://t.me/figuresGuru18">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a href="https://t.me/figuresGuru18">[ ғɪɢᴜʀᴇsGᴜʀᴜ ]</a></b>"""
+    CAPTION = """<b><a href="https://t.me/FiguresGuruMovie">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a href="https://t.me/FiguresGuruMovie">[ ғɪɢᴜʀᴇsGᴜʀᴜ ]</a></b>"""
 
     
     MOVIE_UPDATE_NOTIFY_TXT = """
